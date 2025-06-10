@@ -1,6 +1,13 @@
 {
-	"rewrites": [{ "source": "/(.*)", "destination": "/" }]
+	"projects": {},
+	"rewrites": [
+	  {
+		"source": "/(.*)",
+		"destination": "/"
+	  }
+	]
   }
+  
 
 
 
