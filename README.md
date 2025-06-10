@@ -76,3 +76,5 @@ Authenticate an existing user.
 - The backend leverages Cloudflare Workers for high scalability and low latency.
 - Prisma Accelerate is used for efficient connection pooling with PostgreSQL.
 - Zod is used for schema validation and type inference, especially for frontend type safety.
+
+Note:Copilot was not wrking i will add docs later
