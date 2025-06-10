@@ -2,7 +2,7 @@
 
 This-Blog is a modern blogging platform built with a robust and scalable stack:
 
-- **Frontend:** React
+- **Frontend:** React (with custom hooks for state management and API calls)
 - **Backend:** Cloudflare Workers (using [Hono](https://hono.dev/))
 - **Validation & Type Inference:** Zod (for frontend types)
 - **Language:** TypeScript
@@ -21,7 +21,8 @@ Register a new user.
 ```json
 {
   "email": "user@example.com",
-  "password": "yourpassword"
+  "password": "yourpassword",
+  "name": "Your Name"
 }
 ```
 
@@ -29,7 +30,18 @@ Register a new user.
 - `200 OK`
   ```json
   {
-    "jwt": "<token>"
+    "jwt": "<token>",
+    "user": {
+      "id": "userId",
+      "email": "user@example.com",
+      "name": "Your Name"
+    }
+  }
+  ```
+- `400 Bad Request`
+  ```json
+  {
+    "message": "Inputs not correct"
   }
   ```
 - `403 Forbidden`
@@ -58,7 +70,18 @@ Authenticate an existing user.
 - `200 OK`
   ```json
   {
-    "jwt": "<token>"
+    "jwt": "<token>",
+    "user": {
+      "id": "userId",
+      "email": "user@example.com",
+      "name": "Your Name"
+    }
+  }
+  ```
+- `400 Bad Request`
+  ```json
+  {
+    "message": "Inputs not correct"
   }
   ```
 - `403 Forbidden`
@@ -70,11 +93,132 @@ Authenticate an existing user.
 
 ---
 
-## Notes
+### `POST /api/v1/blog`
 
-- JWT tokens are returned on successful signup and signin. Use them in the `Authorization` header for protected routes.
-- The backend leverages Cloudflare Workers for high scalability and low latency.
-- Prisma Accelerate is used for efficient connection pooling with PostgreSQL.
-- Zod is used for schema validation and type inference, especially for frontend type safety.
+**Description:**  
+Create a new blog post.
 
-Note:Copilot was not wrking i will add docs later
+**Request Body:**
+```json
+{
+  "title": "Blog Title",
+  "content": "Blog content"
+}
+```
+
+**Response:**
+- `200 OK`
+  ```json
+  {
+    "id": "postId"
+  }
+  ```
+- `400 Bad Request`
+  ```json
+  {
+    "message": "Inputs not correct"
+  }
+  ```
+- `401 Unauthorized`
+  ```json
+  {
+    "error": "unauthorized"
+  }
+  ```
+
+---
+
+### `PUT /api/v1/blog`
+
+**Description:**  
+Update an existing blog post.
+
+**Request Body:**
+```json
+{
+  "id": "postId",
+  "title": "Updated Title",
+  "content": "Updated content"
+}
+```
+
+**Response:**
+- `200 OK`
+  ```json
+  {
+    "id": "postId",
+    "title": "Updated Title",
+    "content": "Updated content"
+  }
+  ```
+- `400 Bad Request`
+  ```json
+  {
+    "message": "Inputs not correct"
+  }
+  ```
+- `401 Unauthorized`
+  ```json
+  {
+    "error": "unauthorized"
+  }
+  ```
+
+---
+
+### `GET /api/v1/blog/bulk`
+
+**Description:**  
+Retrieve all blog posts.
+
+**Response:**
+- `200 OK`
+  ```json
+  [
+    {
+      "id": "postId",
+      "title": "Blog Title",
+      "content": "Blog content",
+      "author": {
+        "name": "Author Name"
+      }
+    }
+  ]
+  ```
+
+---
+
+### `DELETE /api/v1/blog/delete-all`
+
+**Description:**  
+Delete all blog posts.
+
+**Response:**
+- `200 OK`
+  ```json
+  {
+    "message": "All blog posts have been deleted."
+  }
+  ```
+
+---
+
+### `GET /api/v1/blog/:id`
+
+**Description:**  
+Retrieve a specific blog post by ID.
+
+**Response:**
+- `200 OK`
+  ```json
+  {
+    "id": "postId",
+    "title": "Blog Title",
+    "content": "Blog content",
+    "author": {
+      "name": "Author Name"
+    }
+  }
+  ```
+
+---
