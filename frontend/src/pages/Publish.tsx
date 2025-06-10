@@ -1,7 +1,8 @@
 
 import Appbar from '../components/Appbar'
 import axios from 'axios'
-import {ChangeEvent,useState} from 'react'
+import { useState } from 'react';
+import type { ChangeEvent } from 'react';
 import {useNavigate} from 'react-router-dom'
 import {BACKEND_URL} from "../config"
 
@@ -46,9 +47,6 @@ const Publish = () => {
 }
 
 export default Publish
-
-
-import React from "react";
 
 function TextEditor({
   onChange,

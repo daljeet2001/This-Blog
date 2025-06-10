@@ -1,6 +1,5 @@
 import {Link,useNavigate} from 'react-router-dom';
 import type {SignupInput} from '@daljeet2001/common-blog'
-import type { ChangeEvent } from "react";
 import axios from 'axios'
 import {useState} from "react";
 import {BACKEND_URL} from '../config'

@@ -1,4 +1,3 @@
-import React from "react"
 import {useBlog} from "../hooks"
 import {useParams} from "react-router-dom"
 import {FullBlog} from "../components/FullBlog"
@@ -7,7 +6,8 @@ import {BlogSkeleton2} from '../components/BlogSkeleton'
 
 const Blog = () => {
   const {id} =useParams();
-  const {loading,blog} =useBlog({id});
+  const { loading, blog } = useBlog({ id: id! });
+
   if(loading){
     return  <div>
       <Appbar/>
@@ -23,8 +23,18 @@ const Blog = () => {
   }
   return (
     <div>
-      <FullBlog blog={blog}/>
-    </div>
+    {blog ? (
+      <FullBlog blog={blog} />
+    ) : (
+      <div className="flex justify-center">
+      <div className="w-screen">
+        <BlogSkeleton2/>
+       
+        
+      </div>
+    </div> 
+    )}
+  </div>
   )
 }
 

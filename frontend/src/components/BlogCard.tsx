@@ -1,5 +1,5 @@
-import React from 'react'
-import {Link,useNavigate} from 'react-router-dom';
+
+import {Link} from 'react-router-dom';
 
 interface BlogCardProps{
     authorName:string;
@@ -41,7 +41,7 @@ export default Blogcard
 
  export function Avatar({name}:{name:string}){
     return (
-    <div className="relative inline-flex items-center justify-center w-6 h-6 overflow-hidden bg-gray-200 rounded-full">
+    <div className="relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-200 rounded-full">
     <span className="text-xs text-gray-600 dark:text-gray-300">{name[0]}</span>
 </div>
     )
